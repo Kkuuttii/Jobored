@@ -1,12 +1,16 @@
 import styles from "./index.module.scss";
-import { Outlet } from "react-router-dom";
 import { HeaderMenu } from "components/HeaderMenu";
+import { Outlet } from "react-router-dom";
 
 function MainLayout() {
   return (
-    <div className={styles.MainLayout}>
+    <div className={styles.mainLayout}>
       <HeaderMenu />
-      <Outlet />
+      <div className={styles.mainContainer}>
+        <main className={styles.mainContent}>
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,34 @@
+.emptyState {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.emptyImage {
+    width: 240px;
+    height: 230.27px
+}
+
+.emptyText {
+    font-weight: 700;
+    font-size: 24px;
+    color: #343A40;
+    margin-top: 30px;
+}
+
+.vacanciesButton {
+    border-radius: 8px;
+    background-color: var(--blue-100);
+    color: var(--blue-600);
+    width: 164px;
+    height: 42px;
+    margin-top: 27px;
+}
+
+@media (max-width: 1200px) {
+    .emptyText {
+       text-align: center;
+    }
+}

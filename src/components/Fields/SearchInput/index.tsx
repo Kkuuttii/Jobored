@@ -1,29 +1,36 @@
 import styles from "./index.module.scss";
-import classNames from "classnames";
-import {
-  TextInput,
-  TextInputProps,
-  ActionIcon,
-  useMantineTheme,
-  Button,
-} from "@mantine/core";
-
 import SearchIcon from "images/SearchIcon.svg";
+import { TextInput, Button } from "@mantine/core";
+import { useState } from "react";
 
-export function SearchInput(props: TextInputProps) {
-  const theme = useMantineTheme();
+interface ISearchInput {
+  searchInputValue: (value: string) => void;
+  placeholder?: string;
+}
+
+export function SearchInput({ searchInputValue, placeholder }: ISearchInput) {
+  const [searchValue, setSearchValue] = useState("");
 
   return (
     <TextInput
       icon={<img src={SearchIcon} alt="Searching" />}
       size="lg"
       radius="md"
-      rightSection={<Button className={styles.SearchButton}>Поиск</Button>}
-      placeholder="Введите название вакансии"
+      rightSection={
+        <Button
+          className={styles.searchButton}
+          onClick={() => searchInputValue(searchValue)}
+          data-elem="search-button"
+        >
+          Поиск
+        </Button>
+      }
+      placeholder={placeholder}
       rightSectionWidth={95}
-      {...props}
-      className={styles.SearchInput}
+      className={styles.searchInput}
       iconWidth={36}
+      onChange={(value) => setSearchValue(value.target.value)}
+      data-elem="search-input"
     />
   );
 }

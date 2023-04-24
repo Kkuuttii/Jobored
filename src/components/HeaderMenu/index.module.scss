@@ -1,44 +1,108 @@
-.Header{
+.header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     margin: 0;
     height: 84px;
     border: 0;
-    width: 100%
-
-}
-.logoWrapper{
-    margin: 0 
+    width: 100%;
+    background-color: white;
 }
 
-.logo{
+.contentWrapper {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-width: 1116px;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logoIcon{
-    width: 30px;
-    margin-left: 146px;
+.menuWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
-.jobored{
+
+.logo {
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    left: 0px;
+}
+
+.logoIcon {
+    width: 30px;
+}
+
+.jobored {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 24px;
     margin-left: 12px;
 }
 
-.jobSearching{
-    margin-left: 280px;
+.jobSearching {
     display: flex;
     white-space: nowrap;
-    font-weight: 400;
-    font-size: 16px;
-
+    
 }
 
-.favorites{
-    margin-right: 582px;
+.favorites {
     margin-left: 60px;
+}
+
+.selected {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--blue-main)
+}
+
+.notSelected {
+    color: black;
     font-weight: 400;
     font-size: 16px;
+    cursor: pointer;
 }
+
+.vacancy {
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .contentWrapper {
+        min-width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        margin-top: 10px;
+        position: relative;
+    }
+
+    .contentWrapper {
+        flex-direction: column;
+        gap: 5px;   
+    }
+
+    .menuWrapper {
+        gap: 5px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .favorites {
+        margin: 0;
+    }
+
+    .header {
+        height: 150px;
+    }
+}
+
+

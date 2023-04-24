@@ -1,4 +1,4 @@
-.SelectField{
+.selectField {
     border-color: transparent;
     height: 42px;
     width: 100%;
@@ -6,17 +6,15 @@
     font-size: 14px;
     position: relative;
     margin-top: 8px;
-    
 }
 
-.VectorSelectListWrapper{
+.vectorSelectListWrapper {
     width: 24px;
     height: 24px;
     position: absolute;
     right: 12px;
 }
 
-.VectorSelectList{
+.vectorSelectList {
     height: 100%;
-    // width: 50%;
 }
