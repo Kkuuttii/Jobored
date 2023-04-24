@@ -1,0 +1,38 @@
+.NumberInput{
+    border-color: transparent;
+    height: 42px;
+    width: 100%;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.numberInputRightSection{
+    border: 0
+}
+
+.arrowsSection{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 42px; 
+}
+
+.arrowWrapper{
+    width: 12px;
+    height: 12px;
+    position: relative;
+    height: 50%;
+    width: 100%;
+}
+
+.arrowUp{
+    position: absolute;
+    top: 8px;
+    right: 12px;
+}
+
+.arrowDown{
+    position: absolute;
+    top: 0px;
+    right: 12px;
+}
