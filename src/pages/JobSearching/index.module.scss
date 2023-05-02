@@ -1,0 +1,37 @@
+.JobSearching{
+    display: flex;
+    justify-content: center;
+    height: 90%;
+    margin-top: 40px;
+}
+
+.jobsList{
+    width: 773px;
+    height: 100%;
+    margin-left: 28px;
+}
+
+.jobCardContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.jobCard{
+    margin-top: 100px;
+    gap: 16px;
+}
+
+.paginationWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+// TO Do в других размерах экрана пагинация налепливается на список вакансий
+.pagination{
+    position: absolute;
+    bottom: 44px;
+
+}
