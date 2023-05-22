@@ -27,7 +27,7 @@ function Vacancies() {
     paymentTo: null,
     selectededIndustryKey: null,
   });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const debouncedActivePage = useDebounce(activePage, 300);
   const { item: favouriteIds, setItemToLocalStorage } = useLocalStorage<
@@ -75,12 +75,11 @@ function Vacancies() {
           "v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948",
       },
     }).then((response) => {
+      setIsLoading(false);
       setJobInfo(response.data.objects);
       setTotalPages(
         response.data.total > 500 ? 125 : Math.ceil(response.data.total / 4)
       );
-
-      setIsLoading(false);
     });
   }, [resultURL]);
 
@@ -132,18 +131,21 @@ function Vacancies() {
           searchInputValue={getSearchValue}
           placeholder={"Введите название вакансии"}
         />
-        {isLoading && (
-          <div className={styles.loaderWrapper}>
-            <Loader size="xl" />
-          </div>
-        )}
-        {!jobInfo?.length ? (
+        {!jobInfo?.length && !isLoading ? (
           <div className={styles.emptyState}>
             <EmptyState isJobSearching={true} />
           </div>
         ) : (
           <>
-            <div className={styles.jobCardContainer}>{jobCardsList}</div>
+            <div className={styles.jobCardContainer}>
+              {isLoading ? (
+                <div className={styles.loaderWrapper}>
+                  <Loader size="xl" />
+                </div>
+              ) : (
+                jobCardsList
+              )}
+            </div>
             <div className={styles.paginationWrapper}>
               <MantinePagination
                 total={totalPages}

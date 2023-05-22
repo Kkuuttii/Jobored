@@ -84,15 +84,19 @@ export function Favourites() {
 
   return (
     <div className={styles.favourites}>
-      {isLoading && (
-        <div className={styles.loaderWrapper}>
-          <Loader size="xl" />
-        </div>
-      )}
-      {!favouriteIds.length && <EmptyState />}
+      {!favouriteIds.length && !isLoading && <EmptyState />}
       {!!favouriteIds.length && (
         <>
-          <div className={styles.jobCardContainer}>{jobCardsList}</div>
+          <div className={styles.jobCardContainer}>
+            {" "}
+            {isLoading ? (
+              <div className={styles.loaderWrapper}>
+                <Loader size="xl" />
+              </div>
+            ) : (
+              jobCardsList
+            )}
+          </div>
           <div className={styles.paginationWrapper}>
             <MantinePagination
               total={Math.ceil(favouriteIds.length / 4)}
