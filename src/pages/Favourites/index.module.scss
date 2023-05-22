@@ -1,0 +1,44 @@
+.favourites {
+    width: 773px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loaderWrapper {
+    width: 773px;
+    height: 732px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.jobCardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 0;
+    height: 596px;
+    width: 100%;
+}
+
+.paginationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 104px;
+}
+
+@media (max-width: 1200px) {
+    .favourites {
+        width: 100%
+    }
+}
+
+@media (max-width: 576px) {
+    .jobCard {
+        height: 160px;
+        padding: 15px;
+    }
+}

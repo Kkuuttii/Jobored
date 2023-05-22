@@ -1,0 +1,84 @@
+.filtersForm {
+    width: 315px;
+    padding: 15px 19px;
+    height: 360px;
+    border: 1px solid #EAEBED;
+}
+
+.popoverFiltersForm {
+    width: 100%;
+}
+
+.cardSection {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.cardHeader {
+    justify-content: space-between; 
+}
+
+.cardTitle {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.cleaningButton {
+    background-color: transparent;
+    border: 0;
+    height: 20px;
+    margin-top: 2px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.cleanAllDiv {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    width: 115px;
+}
+
+.cleanAllText {
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0;
+    color: var(--grey);
+    font-family: Inter;
+}
+
+.cardSubtitle {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.industry {
+    margin-top: 23px;
+}
+
+.industryInput {
+    height: 40px;
+    margin-top: 0px;
+}
+
+.salary {
+    margin-top: 11px;
+}
+
+.salaryInput {
+    margin-top: 10px;
+}
+
+.submit {
+    height: 40px;
+    margin-top: 10px;
+}
+
+@media (max-width: 1200px) {
+    .filtersForm {
+        width: 80%;
+        padding: 20px;
+        height: 360px;
+    }
+}

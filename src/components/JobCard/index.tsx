@@ -1,89 +1,121 @@
 import styles from "./index.module.scss";
 import classNames from "classnames";
-import { Card, Text, Group, createStyles, rem } from "@mantine/core";
 import Dot from "images/Dot.svg";
-import LocationImage from "images/LocationImage.svg";
 import EmptyStar from "images/EmptyStar.svg";
+import LocationImage from "images/LocationImage.svg";
 import SelectedStar from "images/SelectedStar.svg";
-
-interface JobCard {
-  className?: string;
-  profession?: string;
-  town?: string;
-  typeOfWork?: string;
-  payment?: string;
-}
+import { Card, Text, Group, createStyles, Tooltip } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
   },
-
-  section: {
-    borderBottom: `${rem(1)} solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-    paddingLeft: theme.spacing.md,
-    paddingRight: theme.spacing.md,
-    paddingBottom: theme.spacing.md,
-  },
-
-  like: {
-    color: theme.colors.red[6],
-  },
 }));
 
-// profession = название вакансии
-// firm_name = название компании
-// town.title = город
-// catalogues[0].title = название отрасли
-// type_of_work.title = тип занятости (полный день и тд)
-// payment_to, payment_from, currency = для отображения оклада
+interface IJobCard {
+  className?: string;
+  profession?: string;
+  town?: string;
+  typeOfWork?: string;
+  paymentFrom: number;
+  paymentTo: number;
+  currency?: string;
+  id: number;
+  titleClassName?: string;
+  jobClassName?: string;
+  paymentClassName?: string;
+  typeOfWorkClassName?: string;
+  townClassName?: string;
+  onFavouriteClick?: (id: number) => void;
+  favouriteIds?: number[];
+}
 
 export function JobCard({
   profession,
   town,
   typeOfWork,
-  payment,
-  className,
-}: JobCard) {
+  paymentFrom,
+  paymentTo,
+  currency,
+  id,
+  titleClassName,
+  jobClassName,
+  paymentClassName,
+  typeOfWorkClassName,
+  townClassName,
+  onFavouriteClick,
+  favouriteIds,
+}: IJobCard) {
   const { classes } = useStyles();
+  const navigate = useNavigate();
+
+  const payment = (
+    paymentFrom: number,
+    paymentTo: number,
+    currency: string | undefined
+  ) => {
+    if (paymentFrom && paymentTo) {
+      return `${paymentFrom} - ${paymentTo} ${currency}`;
+    } else if (!paymentFrom && !paymentTo) {
+      return `по договоренности `;
+    } else if (!paymentTo) {
+      return `от ${paymentFrom} ${currency}`;
+    } else {
+      return `${paymentTo} ${currency}`;
+    }
+  };
 
   return (
     <Card
       withBorder
       radius="md"
       p="md"
-      className={classNames(classes.card, styles.JobCard)}
+      className={classNames(classes.card, styles.jobCard, jobClassName)}
+      data-elem={`vacancy-${id}`}
     >
       <div className={styles.jobInfoWrapper}>
-        <div>
-          <Text mt="md" className={styles.jobTitle}>
-            {profession}
-          </Text>
+        <div className={styles.jobTextInfo}>
+          <Tooltip label={profession} position={"top"}>
+            <Text
+              mt="md"
+              className={classNames(styles.jobTitle, titleClassName)}
+              onClick={() => navigate(`/vacancies/${id}`)}
+              truncate="end"
+            >
+              {profession}
+            </Text>
+          </Tooltip>
           <Group spacing={7} mt={5}>
-            <Text className={styles.payment}>
-              {/* з/п от 70000 rub */}
-              {payment}
+            <Text className={classNames(styles.payment, paymentClassName)}>
+              з/п {payment(paymentFrom, paymentTo, currency)}
             </Text>
             <img src={Dot} alt="." className={styles.dotImage} />
-            <Text className={styles.typeOfWork}>
-              {/* Полный рабочий день */}
+            <Text
+              className={classNames(styles.typeOfWork, typeOfWorkClassName)}
+            >
               {typeOfWork}
             </Text>
           </Group>
           <Group spacing={7} mt={5} className={styles.location}>
             <img src={LocationImage} alt="Location" />
-            <Text className={styles.locationText}>
-              {/* Новый Уренгой */}
+            <Text className={classNames(styles.locationText, townClassName)}>
               {town}
             </Text>
           </Group>
         </div>
-
-        <div className={styles.starWrapper}>
-          <img src={EmptyStar} alt="not favourite" />
+        <div
+          className={styles.starWrapper}
+          onClick={() => onFavouriteClick?.(id)}
+          data-elem={`vacancy-${id}-shortlist-button`}
+        >
+          {!favouriteIds?.includes(id) && (
+            <img src={EmptyStar} alt="not favourite" />
+          )}
+          {favouriteIds?.includes(id) && (
+            <img src={SelectedStar} alt="favourite" />
+          )}
         </div>
       </div>
     </Card>

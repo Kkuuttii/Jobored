@@ -1,23 +1,28 @@
-.SearchInput{
+.searchInput {
     height: 48px;
     width: 100%;
-    input[type="text"]::placeholder{
+    input[type="text"]::placeholder {
         font-family: 'Inter';
         font-weight: 400;
         font-size: 14px;
         padding: 8px 12px 8px 0px;
         height: 48px;
     }
-
 }
 
-.SearchButton{
+.searchButton {
     background-color: var(--blue-main);
     height: 32px;
-    width: 89px;
+    width: 83px;
     font-family: 'Inter';
     font-weight: 500;
     font-size: 14px;
     border-radius: 8px;
     margin-right: 17px;
+}
+
+@media (max-width: 1200px) {
+    .searchInput {
+        margin-top: 20px;
+    }
 }

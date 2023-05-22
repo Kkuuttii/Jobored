@@ -1,20 +1,8 @@
-import {
-  createStyles,
-  Header,
-  Menu,
-  Group,
-  Center,
-  Burger,
-  Container,
-  rem,
-} from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import { IconChevronDown } from "@tabler/icons-react";
-import { MantineLogo } from "@mantine/ds";
 import styles from "./index.module.scss";
 import classNames from "classnames";
 import Union from "images/Union.svg";
-import Jobored from "images/Jobored.svg";
+import { createStyles, rem } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -23,19 +11,16 @@ const useStyles = createStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   links: {
     [theme.fn.smallerThan("sm")]: {
-      display: "none",
+      display: "block",
     },
   },
-
   burger: {
     [theme.fn.largerThan("sm")]: {
-      display: "none",
+      display: "block",
     },
   },
-
   link: {
     display: "block",
     lineHeight: 1,
@@ -56,47 +41,57 @@ const useStyles = createStyles((theme) => ({
           : theme.colors.gray[0],
     },
   },
-
   linkLabel: {
     marginRight: rem(5),
   },
 }));
 
 export function HeaderMenu() {
-  const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
+  const navigate = useNavigate();
+
+  let selectedPage = window.location.pathname.split("/")[1];
+  let isItVacancy =
+    window.location.pathname.split("/")[1] === "vacancies" &&
+    window.location.pathname.split("/")[2] !== undefined
+      ? true
+      : false;
 
   return (
-    <Header height={84} mb={120} className={styles.Header}>
-      <Container className={styles.logoWrapper}>
-        <div className={classNames(classes.inner, styles.logoWrapper)}>
-          <div className={styles.logo}>
-            <img src={Union} alt="logo" className={styles.logoIcon} />
-            <p className={styles.jobored}>Jobored</p>
-          </div>
-
-          <Group
-            spacing={5}
-            className={classNames(classes.links, styles.jobSearching)}
-          >
-            {/* {items} */}
-            Поиск Вакансий
-          </Group>
-          <Group
-            spacing={5}
-            className={classNames(classes.links, styles.favorites)}
-          >
-            {/* {items} */}
-            Избранное
-          </Group>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            className={classes.burger}
-            size="sm"
-          />
+    <div className={styles.header}>
+      <div className={classNames(styles.contentWrapper)}>
+        <div className={styles.logo} onClick={() => navigate("/vacancies")}>
+          <img src={Union} alt="logo" className={styles.logoIcon} />
+          <span className={styles.jobored}>Jobored</span>
         </div>
-      </Container>
-    </Header>
+        <div className={styles.menuWrapper}>
+          <div
+            className={classNames(
+              classes.links,
+              styles.jobSearching,
+              selectedPage === "vacancies"
+                ? styles.selected
+                : styles.notSelected,
+              isItVacancy && styles.vacancy
+            )}
+            onClick={() => navigate("/vacancies")}
+          >
+            Поиск Вакансий
+          </div>
+          <div
+            className={classNames(
+              classes.links,
+              styles.favorites,
+              selectedPage === "favourites"
+                ? styles.selected
+                : styles.notSelected
+            )}
+            onClick={() => navigate("/favourites")}
+          >
+            Избранное
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

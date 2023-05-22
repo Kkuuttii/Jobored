@@ -1,0 +1,60 @@
+.loaderWrapper {
+    width: 773px;
+    height: 732px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vacancy {
+    width: 773px;
+    height: 100%;
+}
+
+.jobDetailedInfo {
+    margin-top: 20px;
+}
+
+.jobCardParameters {
+    padding: 19px 24px 24px 24px;
+    height: auto;
+}
+
+.jobTitleBlack {
+    font-weight: 700;
+    font-size: 28px;
+    color: black;
+    margin: 0;
+}
+
+.payment {
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+}
+
+.typeOfWork {
+    font-weight: 400;
+    font-size: 20px;
+    color: black;
+}
+
+.town {
+margin-top: 2px;
+}
+
+@media (max-width: 1200px) {
+    .jobCardParameters {
+        height: auto;
+        padding: 5px 15px;
+    }
+    .jobDetailedInfo {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vacancy {
+        width: 100%;
+    }
+}

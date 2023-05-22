@@ -1,23 +1,35 @@
 import styles from "./index.module.scss";
-import classNames from "classnames";
-import VectorUp from "images/VectorUp.svg";
 import VectorDown from "images/VectorDown.svg";
-import { NumberInput } from "@mantine/core";
-import { useState } from "react";
+import VectorUp from "images/VectorUp.svg";
+import { NumberInput, Tooltip } from "@mantine/core";
+import React, { useRef } from "react";
 
-interface CurrencyInput {
+export interface IInputNumber {
   placeholder: string;
   className?: string;
+  value?: number;
+  onChange?: (value?: number | null) => void;
+  error?: React.ReactNode;
+  dataAttributes: string;
 }
-
-export function InputNumber({ placeholder }: CurrencyInput) {
-  const [inputValue, setInputValue] = useState<number>();
+export function InputNumber({
+  placeholder,
+  onChange,
+  value,
+  error,
+  dataAttributes,
+}: IInputNumber) {
+  const inputValue = useRef<number>();
 
   const handleArrowUpClick = () => {
-    setInputValue((prev) => (prev ? prev + 1 : 1));
+    const newInputValue = inputValue.current ? inputValue.current + 1 : 1;
+    onChange?.(newInputValue);
+    inputValue.current = newInputValue;
   };
   const handleArrowDownClick = () => {
-    setInputValue((prev) => (prev ? prev - 1 : 0));
+    const newInputValue = inputValue.current ? inputValue.current - 1 : 0;
+    onChange?.(newInputValue);
+    inputValue.current = newInputValue;
   };
 
   let arrowsSection = (
@@ -33,18 +45,25 @@ export function InputNumber({ placeholder }: CurrencyInput) {
       </div>
     </div>
   );
-  console.log(inputValue);
+
   return (
-    <NumberInput
-      // label="Step the value with interval function"
-      // description="Step value will increase incrementally when control is hold"
-      stepHoldDelay={500}
-      stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
-      className={styles.NumberInput}
-      placeholder={placeholder}
-      rightSection={arrowsSection}
-      value={inputValue}
-      onChange={(event) => setInputValue(+event)}
-    />
+    <Tooltip label={error} disabled={!error} position={"top"}>
+      <NumberInput
+        stepHoldDelay={500}
+        stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
+        className={styles.numberInput}
+        placeholder={placeholder}
+        rightSection={arrowsSection}
+        size="md"
+        radius="md"
+        value={value ?? ""}
+        onChange={(value) => {
+          onChange?.(+value);
+          inputValue.current = +value;
+        }}
+        error={error && " "}
+        data-elem={dataAttributes}
+      />
+    </Tooltip>
   );
 }
