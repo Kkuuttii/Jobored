@@ -29,7 +29,7 @@ function App() {
       withGlobalStyles
       withNormalizeCSS
     >
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Navigate to={"/vacancies"} />} />
