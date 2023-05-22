@@ -17,7 +17,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { IIndustryList } from "types/requests";
 import { IIndustriesList } from "types/global";
-import { getSelectedIndustryKey } from "utils/global";
+import { getSelectedIndustryKey } from "utils";
 import { useForm } from "@mantine/form";
 import { IFilters } from "pages/Vacancies";
 import { MD_BREAKPOINT } from "utils/constants";

@@ -6,7 +6,7 @@ import { Pagination as MantinePagination, Loader } from "@mantine/core";
 import { IJobInfo } from "types/requests";
 import axios from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { getUrl, setIdToLocalStorage } from "utils/global";
+import { getUrl, setIdToLocalStorage } from "utils";
 import { useDebounce } from "hooks/useDebounce";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { EmptyState } from "components/EmptyState";

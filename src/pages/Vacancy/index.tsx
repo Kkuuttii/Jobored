@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { Loader } from "@mantine/core";
-import { setIdToLocalStorage } from "utils/global";
+import { setIdToLocalStorage } from "utils";
 
 export function Vacancy() {
   const [vacancyInfo, setVacancyInfo] = useState<any>();

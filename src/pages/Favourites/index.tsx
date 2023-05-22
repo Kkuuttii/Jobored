@@ -2,7 +2,7 @@ import axios from "axios";
 import styles from "./index.module.scss";
 import { JobCard } from "components/JobCard";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { getUrl, setIdToLocalStorage } from "utils/global";
+import { getUrl, setIdToLocalStorage } from "utils";
 import { Pagination as MantinePagination, Loader } from "@mantine/core";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { IJobInfo } from "types/requests";
